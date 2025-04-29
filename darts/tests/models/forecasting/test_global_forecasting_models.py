@@ -44,7 +44,7 @@ from darts.models.forecasting.torch_forecasting_model import (
     PastCovariatesTorchModel,
     TorchForecastingModel,
 )
-from darts.utils.likelihood_models import GaussianLikelihood
+from darts.utils.likelihood_models.torch import GaussianLikelihood
 
 IN_LEN = 24
 OUT_LEN = 12
@@ -134,9 +134,19 @@ models_cls_kwargs_errs = [
         NLinearModel,
         {
             "n_epochs": 10,
+            "normalize": False,
             "pl_trainer_kwargs": tfm_kwargs["pl_trainer_kwargs"],
         },
         50.0,
+    ),
+    (
+        NLinearModel,
+        {
+            "n_epochs": 10,
+            "normalize": True,
+            "pl_trainer_kwargs": tfm_kwargs["pl_trainer_kwargs"],
+        },
+        140.0,
     ),
     (
         DLinearModel,
